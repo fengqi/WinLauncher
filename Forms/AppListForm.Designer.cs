@@ -116,6 +116,7 @@
             this.Name = "AppListForm";
             this.ShowInTaskbar = false;
             this.Text = "应用列表";
+            this.Activated += new System.EventHandler(this.AppListForm_Activated);
             this.Load += new System.EventHandler(this.ApplicationListForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

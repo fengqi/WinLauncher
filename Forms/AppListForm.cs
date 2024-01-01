@@ -38,6 +38,12 @@ namespace WinLauncher.Forms {
             this.Location = new Point(popupRight, popupBottom);
         }
 
+        private void AppListForm_Activated(object sender, EventArgs e) {
+            if (Properties.Settings.Default.enableSearch) {
+                searchApp.Focus();
+            }
+        }
+
         // 读取应用列表
         private void LoadAppList() {
             UpdateUI();
