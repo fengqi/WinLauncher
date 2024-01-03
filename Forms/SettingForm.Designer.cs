@@ -38,8 +38,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.appListMarginRight = new System.Windows.Forms.NumericUpDown();
             this.appListLocationXLabel = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.autoStart = new System.Windows.Forms.CheckBox();
             this.autoAddDesktopLnk = new System.Windows.Forms.CheckBox();
             this.submitBtn = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.appListMarginBottom)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appListMarginRight)).BeginInit();
-            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -221,27 +221,27 @@
             this.appListLocationXLabel.Text = "窗口位置与屏幕右边距离";
             this.appListLocationXLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(452, 232);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.autoStart);
-            this.tabPage4.Controls.Add(this.autoAddDesktopLnk);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(452, 232);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "其他设置";
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "信息";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.autoStart);
+            this.tabPage3.Controls.Add(this.autoAddDesktopLnk);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(452, 232);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "其他设置";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // autoStart
             // 
@@ -307,8 +307,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.appListMarginBottom)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.appListMarginRight)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -320,8 +320,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button submitBtn;
         private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label appListLocationXLabel;
         private System.Windows.Forms.NumericUpDown appListMarginRight;

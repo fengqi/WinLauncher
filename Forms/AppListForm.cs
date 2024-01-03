@@ -15,16 +15,12 @@ namespace WinLauncher.Forms {
 
         public AppListForm() {
             InitializeComponent();
+            searchTimer.Tick += SearchTimer_Tick;
         }
 
         private void ApplicationListForm_Load(object sender, EventArgs e) {
             SetLocation();
             LoadAppList();
-            if (!Properties.Settings.Default.enableSearch) {
-                searchApp.Visible = false;
-            }
-            searchTimer.Interval = 500;
-            searchTimer.Tick += SearchTimer_Tick;
         }
 
         //  设置窗口位置
@@ -32,26 +28,30 @@ namespace WinLauncher.Forms {
             int screenRight = Screen.PrimaryScreen.WorkingArea.Right;
             int screenBottom = Screen.PrimaryScreen.WorkingArea.Bottom;
 
-            int popupRight = screenRight - this.Width - Properties.Settings.Default.appListMarginRight; 
+            int popupRight = screenRight - this.Width - Properties.Settings.Default.appListMarginRight;
             int popupBottom = screenBottom - this.Height - Properties.Settings.Default.appListMarginBottom;
 
             this.Location = new Point(popupRight, popupBottom);
         }
 
-        private void AppListForm_Activated(object sender, EventArgs e) {
+        // 窗口显示时
+        private void AppListForm_VisibleChanged(object sender, EventArgs e) {
             if (Properties.Settings.Default.enableSearch) {
+                searchTimer.Interval = Properties.Settings.Default.searchDelay;
+                searchApp.TextChanged -= SearchApp_TextChanged;
+                searchApp.Clear();
+                searchApp.TextChanged += SearchApp_TextChanged;
+                searchApp.Visible = true;
                 searchApp.Focus();
+            }
+            else {
+                searchApp.Visible = false;
             }
         }
 
         // 读取应用列表
         private void LoadAppList() {
             UpdateUI();
-        }
-
-        private void AppListForm_FormClosed(object sender, FormClosedEventArgs e) {
-            appLayoutPanel.Controls.Clear();
-            appLayoutPanel = null;
         }
 
         private void AppControl_OnDelete(object sender, EventArgs e) {
@@ -71,7 +71,6 @@ namespace WinLauncher.Forms {
             appManager.IncreaseLaunchCount(appControl.GetAppInfo().ExePath);
             appManager.SaveAppList();
 
-            this.Dispose();
             this.Close();
         }
 
@@ -91,7 +90,6 @@ namespace WinLauncher.Forms {
 
         // 关闭窗口
         private void CloseBtn_Click(object sender, EventArgs e) {
-            this.Dispose();
             this.Close();
         }
 
@@ -146,30 +144,35 @@ namespace WinLauncher.Forms {
 
         // 搜索输入
         private void SearchApp_TextChanged(object sender, EventArgs e) {
+            Console.WriteLine(searchApp.Text);
             searchTimer.Stop();
             searchTimer.Start();
         }
 
         // 搜索定时器
         private void SearchTimer_Tick(object sender, EventArgs e) {
+            Console.WriteLine("search");
             searchTimer.Stop();
             SearchApp_Perform();
         }
 
         // 执行搜索
         private void SearchApp_Perform() {
-            UpdateUI();
+            if (!Properties.Settings.Default.enableSearch) {
+                return;
+            }
 
-            searchApp.Text = searchApp.Text.Replace("\r\n", "");
+            var keywords = searchApp.Text.Replace("\r\n", "");
             List<AppInfo> apps = new List<AppInfo>();
-            foreach (Control control in appLayoutPanel.Controls) {
-                AppControl appControl = (AppControl)control;
-                if (appControl.GetAppInfo().Pinyin.IndexOf(searchApp.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    appControl.GetAppInfo().Name.IndexOf(searchApp.Text, StringComparison.OrdinalIgnoreCase) >= 0) {
-                    apps.Add(appControl.GetAppInfo());
+            foreach (AppInfo appInfo in appManager.LoadAppList()) {
+                if (appInfo.Pinyin.IndexOf(keywords, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    appInfo.Name.IndexOf(keywords, StringComparison.OrdinalIgnoreCase) >= 0) {
+                    apps.Add(appInfo);
                 }
             }
 
+            Console.WriteLine(keywords);
+            Console.WriteLine(apps.Count);
             UpdateUI(apps);
         }
 
@@ -190,6 +193,10 @@ namespace WinLauncher.Forms {
                     MessageBox.Show($"无法打开应用：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void AppListForm_Deactivate(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

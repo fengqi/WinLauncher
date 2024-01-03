@@ -55,7 +55,7 @@ namespace WinLauncher.Services {
                 //apps.AddRange(JsonSerializer.Deserialize<List<AppInfo>>(jsonString));
             }
 
-            return apps.OrderBy(app => app.Name).OrderByDescending(app => app.LaunchCount).ToList();
+            return apps.OrderBy(app => app.Pinyin).OrderByDescending(app => app.LaunchCount).ToList();
         }
 
         // 通过应用名获取应用信息

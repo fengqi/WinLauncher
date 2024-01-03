@@ -29,7 +29,6 @@
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +90,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

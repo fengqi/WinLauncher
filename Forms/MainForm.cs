@@ -5,6 +5,9 @@ using WinLauncher.Services;
 
 namespace WinLauncher {
     public partial class MainForm : Form {
+        private AppListForm appListForm;
+        private SettingForm settingForm;
+
         public MainForm() {
             InitializeComponent();
             CheckInit();
@@ -34,9 +37,16 @@ namespace WinLauncher {
         // 处理托盘图标点击事件
         private void NotifyIcon_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
-                AppListForm appListForm = new AppListForm();
-                appListForm.Show();
-                appListForm.Activate();
+                //AppListForm appListForm = new AppListForm();
+                if (appListForm == null || appListForm.IsDisposed) {
+                    appListForm = new AppListForm();
+                }
+                if (appListForm.Visible) {
+                    appListForm.Close();
+                }
+                else {
+                    appListForm.ShowDialog();
+                }
             }
         }
 
@@ -47,8 +57,17 @@ namespace WinLauncher {
 
         // 处理设置菜单项点击事件
         private void SettingsMenuItem_Click(object sender, EventArgs e) {
-            SettingForm settingForm = new SettingForm();
-            settingForm.Show();
+            if (settingForm == null || settingForm.IsDisposed) {
+                settingForm = new SettingForm();
+            }
+            if (settingForm.Visible) {
+                settingForm.WindowState = FormWindowState.Normal;
+                settingForm.Activate();
+            }
+            else {
+                settingForm.ShowDialog();
+                settingForm.Activate();
+            }
         }
 
         // 处理退出菜单项点击事件

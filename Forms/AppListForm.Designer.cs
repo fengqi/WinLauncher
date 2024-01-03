@@ -40,7 +40,7 @@
             this.appLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.appLayoutPanel.Name = "appLayoutPanel";
             this.appLayoutPanel.Size = new System.Drawing.Size(715, 400);
-            this.appLayoutPanel.TabIndex = 0;
+            this.appLayoutPanel.TabIndex = 3;
             // 
             // panel1
             // 
@@ -65,7 +65,7 @@
             this.searchApp.MaxLength = 30;
             this.searchApp.Name = "searchApp";
             this.searchApp.Size = new System.Drawing.Size(100, 14);
-            this.searchApp.TabIndex = 3;
+            this.searchApp.TabIndex = 0;
             this.searchApp.WordWrap = false;
             this.searchApp.TextChanged += new System.EventHandler(this.SearchApp_TextChanged);
             this.searchApp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchApp_KeyDown);
@@ -116,8 +116,9 @@
             this.Name = "AppListForm";
             this.ShowInTaskbar = false;
             this.Text = "应用列表";
-            this.Activated += new System.EventHandler(this.AppListForm_Activated);
+            this.Deactivate += new System.EventHandler(this.AppListForm_Deactivate);
             this.Load += new System.EventHandler(this.ApplicationListForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.AppListForm_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
