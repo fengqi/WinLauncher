@@ -152,7 +152,7 @@ namespace WinLauncher {
 
         // 鼠标放图标上
         private void AppIcon_MouseHover(object sender, EventArgs e) {
-            var text = string.Format("{0} {1}\n", this.appInfo.ExePath, this.appInfo.Args);
+            var text = string.Format("启动次数：{2}\n路径：{0} {1}\n", this.appInfo.ExePath, this.appInfo.Args, this.appInfo.LaunchCount);
             toolTip.Show(text, appName);
         }
 
