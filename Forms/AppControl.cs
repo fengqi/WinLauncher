@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace WinLauncher {
     public partial class AppControl : UserControl {
@@ -50,7 +51,12 @@ namespace WinLauncher {
                 else {
                     try {
                         OnLaunch?.Invoke(this, e);
-                        Process.Start(this.appInfo.ExePath, this.appInfo.Args);
+                        ProcessStartInfo info = new ProcessStartInfo(this.appInfo.ExePath, this.appInfo.Args);
+                        info.WorkingDirectory = Path.GetDirectoryName(this.appInfo.ExePath);
+
+                        Process process = new Process();
+                        process.StartInfo = info;
+                        process.Start();
                     }
                     catch (Exception ex) {
                         MessageBox.Show($"无法打开应用：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
