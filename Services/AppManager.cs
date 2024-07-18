@@ -78,7 +78,7 @@ namespace WinLauncher.Services {
         public void PinTop(string exePath) {
             int index = apps.FindIndex(app => app.ExePath.Equals(exePath));
             if (index != -1) {
-                apps[index].LaunchCount = apps[0].LaunchCount + 2;
+                apps[index].LaunchCount = LoadAppList()[0].LaunchCount + 2;
             }
         }
 
