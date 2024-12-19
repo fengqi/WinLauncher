@@ -36,10 +36,10 @@
             // appLayoutPanel
             // 
             this.appLayoutPanel.AutoScroll = true;
-            this.appLayoutPanel.Location = new System.Drawing.Point(9, 40);
+            this.appLayoutPanel.Location = new System.Drawing.Point(12, 50);
             this.appLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.appLayoutPanel.Name = "appLayoutPanel";
-            this.appLayoutPanel.Size = new System.Drawing.Size(715, 400);
+            this.appLayoutPanel.Size = new System.Drawing.Size(953, 500);
             this.appLayoutPanel.TabIndex = 3;
             // 
             // panel1
@@ -53,18 +53,19 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(9, 0, 9, 0);
-            this.panel1.Size = new System.Drawing.Size(670, 32);
+            this.panel1.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            this.panel1.Size = new System.Drawing.Size(893, 40);
             this.panel1.TabIndex = 1;
             // 
             // searchApp
             // 
             this.searchApp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchApp.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.searchApp.Location = new System.Drawing.Point(396, 8);
+            this.searchApp.Location = new System.Drawing.Point(528, 11);
+            this.searchApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchApp.MaxLength = 30;
             this.searchApp.Name = "searchApp";
-            this.searchApp.Size = new System.Drawing.Size(100, 14);
+            this.searchApp.Size = new System.Drawing.Size(133, 18);
             this.searchApp.TabIndex = 0;
             this.searchApp.WordWrap = false;
             this.searchApp.TextChanged += new System.EventHandler(this.SearchApp_TextChanged);
@@ -72,9 +73,10 @@
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(583, 3);
+            this.closeBtn.Location = new System.Drawing.Point(777, 4);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(75, 23);
+            this.closeBtn.Size = new System.Drawing.Size(100, 29);
             this.closeBtn.TabIndex = 2;
             this.closeBtn.Text = "关闭";
             this.closeBtn.UseVisualStyleBackColor = true;
@@ -82,9 +84,10 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(502, 3);
+            this.addBtn.Location = new System.Drawing.Point(669, 4);
+            this.addBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.Size = new System.Drawing.Size(100, 29);
             this.addBtn.TabIndex = 1;
             this.addBtn.Text = "添加";
             this.addBtn.UseVisualStyleBackColor = true;
@@ -92,10 +95,10 @@
             // 
             // appListFormTitle
             // 
-            this.appListFormTitle.Location = new System.Drawing.Point(9, 0);
+            this.appListFormTitle.Location = new System.Drawing.Point(12, 0);
             this.appListFormTitle.Margin = new System.Windows.Forms.Padding(0);
             this.appListFormTitle.Name = "appListFormTitle";
-            this.appListFormTitle.Size = new System.Drawing.Size(60, 32);
+            this.appListFormTitle.Size = new System.Drawing.Size(80, 40);
             this.appListFormTitle.TabIndex = 0;
             this.appListFormTitle.Text = "应用列表";
             this.appListFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -107,12 +110,13 @@
             // 
             // AppListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 450);
+            this.ClientSize = new System.Drawing.Size(893, 562);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.appLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AppListForm";
             this.ShowInTaskbar = false;
             this.Text = "应用列表";

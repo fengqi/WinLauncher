@@ -29,6 +29,7 @@
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanWatcherMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,39 +42,49 @@
             // 
             // trayMenu
             // 
+            this.trayMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.trayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutMenuItem,
+            this.scanWatcherMenuItem,
             this.settingsMenuItem,
             this.exitMenuItem});
             this.trayMenu.Name = "trayMenu";
-            this.trayMenu.Size = new System.Drawing.Size(101, 70);
+            this.trayMenu.Size = new System.Drawing.Size(211, 128);
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.aboutMenuItem.Size = new System.Drawing.Size(210, 24);
             this.aboutMenuItem.Text = "关于";
             this.aboutMenuItem.Click += new System.EventHandler(this.AboutMenuItem_Click);
             // 
             // settingsMenuItem
             // 
             this.settingsMenuItem.Name = "settingsMenuItem";
-            this.settingsMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.settingsMenuItem.Size = new System.Drawing.Size(210, 24);
             this.settingsMenuItem.Text = "设置";
             this.settingsMenuItem.Click += new System.EventHandler(this.SettingsMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(210, 24);
             this.exitMenuItem.Text = "退出";
             this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
+            // scanWatcherMenuItem
+            // 
+            this.scanWatcherMenuItem.Name = "scanWatcherMenuItem";
+            this.scanWatcherMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.scanWatcherMenuItem.Text = "扫描";
+            this.scanWatcherMenuItem.Click += new System.EventHandler(this.scanWatcherMenuItem_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 562);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "MainForm";
@@ -90,6 +101,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scanWatcherMenuItem;
     }
 }
 

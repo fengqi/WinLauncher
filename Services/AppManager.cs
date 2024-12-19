@@ -25,6 +25,13 @@ namespace WinLauncher.Services {
             return apps;
         }
 
+        public List<AppInfo> ScanWatcherFloder() {
+            LoadAppList();
+            ScanWatcherFloderApplications();
+
+            return apps;
+        }
+
         // 检查配置文件目录
         public void CheckConfigPath() {
             var userLevel = ConfigurationUserLevel.PerUserRoamingAndLocal;
@@ -226,6 +233,32 @@ namespace WinLauncher.Services {
                     IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                     var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
                     AddApp(name, shortcut.TargetPath, shortcut.TargetPath);
+                }
+            }
+        }
+
+        // 扫描监视文件夹
+        public void ScanWatcherFloderApplications() {
+            var watchFloder = Properties.Settings.Default.watchFloder;
+            if (watchFloder == null || watchFloder.Count == 0) {
+                return;
+            }
+            foreach (var floder in watchFloder) {
+                if (!Directory.Exists(floder)) {
+                    continue;
+                }
+                foreach (string file in System.IO.Directory.GetFiles(floder)) {
+                    if (System.IO.Path.GetExtension(file) == ".exe") {
+                        var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                        var exePath = System.IO.Path.GetDirectoryName(file);
+                        AddApp(name, exePath, file);
+                    }
+                    else if (System.IO.Path.GetExtension(file) == ".lnk") {
+                        IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+                        IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
+                        var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
+                        AddApp(name, shortcut.TargetPath, shortcut.TargetPath);
+                    }
                 }
             }
         }

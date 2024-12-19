@@ -7,6 +7,7 @@ namespace WinLauncher {
     public partial class MainForm : Form {
         private AppListForm appListForm;
         private SettingForm settingForm;
+        private readonly AppManager appManager = new AppManager();
 
         public MainForm() {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace WinLauncher {
         }
 
         // 检查首次启动
-        private static void CheckInit() {
+        private void CheckInit() {
             if (Properties.Settings.Default.Init) {
                 return;
             }
@@ -74,6 +75,10 @@ namespace WinLauncher {
         private void ExitMenuItem_Click(object sender, EventArgs e) {
             this.Close();
             Application.Exit();
+        }
+
+        private void scanWatcherMenuItem_Click(object sender, EventArgs e) {
+            appManager.ScanWatcherFloderApplications();
         }
     }
 }

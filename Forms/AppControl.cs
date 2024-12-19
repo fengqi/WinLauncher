@@ -1,10 +1,10 @@
-﻿using WinLauncher.Models;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
+using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using WinLauncher.Models;
 
 namespace WinLauncher {
     public partial class AppControl : UserControl {
@@ -45,22 +45,22 @@ namespace WinLauncher {
         private void OpenApp(object sender, MouseEventArgs e) {
             bool ctrlKeyDown = (GetKeyState(Keys.ControlKey) & 0x8000) != 0;
             if (e.Button == MouseButtons.Left) {
-                if (ctrlKeyDown) {
-                    System.Diagnostics.Process.Start("explorer.exe", $"/select,{this.appInfo.ExePath}");
+                if (ctrlKeyDown) { // 按住ctrl+左鼠标键
+                    this.openWhereMenuItem_Click(sender, e);
+                    return;
                 }
-                else {
-                    try {
-                        OnLaunch?.Invoke(this, e);
-                        ProcessStartInfo info = new ProcessStartInfo(this.appInfo.ExePath, this.appInfo.Args);
-                        info.WorkingDirectory = Path.GetDirectoryName(this.appInfo.ExePath);
 
-                        Process process = new Process();
-                        process.StartInfo = info;
-                        process.Start();
-                    }
-                    catch (Exception ex) {
-                        MessageBox.Show($"无法打开应用：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                try {
+                    OnLaunch?.Invoke(this, e);
+                    ProcessStartInfo info = new ProcessStartInfo(this.appInfo.ExePath, this.appInfo.Args);
+                    info.WorkingDirectory = Path.GetDirectoryName(this.appInfo.ExePath);
+
+                    Process process = new Process();
+                    process.StartInfo = info;
+                    process.Start();
+                }
+                catch (Exception ex) {
+                    MessageBox.Show($"无法打开应用：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace WinLauncher {
         private void EditIconToolStripMenuItem_Click(object sender, EventArgs e) {
             // todo 
         }
-        
+
         // 删除应用
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e) {
             this.Dispose();
@@ -165,6 +165,11 @@ namespace WinLauncher {
         // 鼠标离开
         private void AppIcon_MouseLeave(object sender, EventArgs e) {
             toolTip.Hide(appName);
+        }
+
+        // 打开所在目录
+        private void openWhereMenuItem_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("explorer.exe", $"/select,{this.appInfo.ExePath}");
         }
     }
 }

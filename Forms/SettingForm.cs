@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +8,10 @@ namespace WinLauncher.Forms {
     public partial class SettingForm : Form {
         public SettingForm() {
             InitializeComponent();
+            if (Properties.Settings.Default.watchFloder == null) {
+                // System.Collections.Specialized.StringCollection
+                Properties.Settings.Default.watchFloder = new StringCollection();
+            }
         }
 
         private void SettingForm_Load(object sender, EventArgs e) {
@@ -17,6 +23,13 @@ namespace WinLauncher.Forms {
             enableSearch.Checked = Properties.Settings.Default.enableSearch;
             searchDelay.Value = Properties.Settings.Default.searchDelay;
             appIconSize.Text = Properties.Settings.Default.appIconSize;
+
+            AppsFloderList.Items.Clear();
+            foreach (string floder in Properties.Settings.Default.watchFloder) {
+                if (floder != "") {
+                    AppsFloderList.Items.Add(floder); ;
+                }
+            }
         }
 
         // 居中显示
@@ -84,6 +97,46 @@ namespace WinLauncher.Forms {
 
         private void AppIconSize_SelectedIndexChanged(object sender, EventArgs e) {
             Properties.Settings.Default.appIconSize = appIconSize.Text;
+        }
+
+        private void SelectFloder(object sender, EventArgs e) {
+            if (AppsFloderDialog.ShowDialog() == DialogResult.OK) {
+                AppsFloder.Text = AppsFloderDialog.SelectedPath;
+                AddFloderBtn.Enabled = true;
+                AddFloderBtn.ForeColor = Color.Black;
+            }
+        }
+
+        private void AppsFloderDialog_HelpRequest(object sender, EventArgs e) {
+
+        }
+
+        private void AddFloderBtn_Click(object sender, EventArgs e) {
+            if (AppsFloder.Text != "") {
+                AppsFloderList.Items.Add(AppsFloder.Text);
+                Properties.Settings.Default.watchFloder.Add(AppsFloder.Text);
+
+                AddFloderBtn.ForeColor = Color.Gray;
+                AddFloderBtn.Enabled = false;
+                AppsFloder.Text = "";
+            }
+        }
+
+        private void AppsFloderList_SelectedValueChanged(object sender, EventArgs e) {
+            Console.WriteLine(AppsFloderList.SelectedItem);
+            if (AppsFloderList.SelectedItem != null) {
+                DelFloderBtn.Enabled = true;
+                DelFloderBtn.ForeColor = Color.Black;
+            }
+        }
+
+        private void DelFloderBtn_Click(object sender, EventArgs e) {
+            if (AppsFloderList.SelectedItem != null) {
+                Properties.Settings.Default.watchFloder.Remove(AppsFloderList.SelectedItem.ToString());
+                AppsFloderList.Items.Remove(AppsFloderList.SelectedItem);
+                DelFloderBtn.Enabled = false;
+                DelFloderBtn.ForeColor = Color.Gray;
+            }
         }
     }
 }

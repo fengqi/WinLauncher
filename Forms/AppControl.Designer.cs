@@ -33,17 +33,18 @@
             this.editIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editExePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openWhereMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.appIcon)).BeginInit();
             this.appMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // appIcon
             // 
-            this.appIcon.Location = new System.Drawing.Point(2, 2);
+            this.appIcon.Location = new System.Drawing.Point(3, 2);
             this.appIcon.Margin = new System.Windows.Forms.Padding(0);
             this.appIcon.Name = "appIcon";
-            this.appIcon.Padding = new System.Windows.Forms.Padding(2);
-            this.appIcon.Size = new System.Drawing.Size(88, 88);
+            this.appIcon.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.appIcon.Size = new System.Drawing.Size(117, 110);
             this.appIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.appIcon.TabIndex = 0;
             this.appIcon.TabStop = false;
@@ -53,9 +54,10 @@
             // 
             // appName
             // 
-            this.appName.Location = new System.Drawing.Point(2, 90);
+            this.appName.Location = new System.Drawing.Point(3, 112);
+            this.appName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.appName.Name = "appName";
-            this.appName.Size = new System.Drawing.Size(88, 32);
+            this.appName.Size = new System.Drawing.Size(117, 40);
             this.appName.TabIndex = 1;
             this.appName.Text = "appName";
             this.appName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -63,20 +65,22 @@
             // 
             // appMenuStrip
             // 
+            this.appMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.appMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pinTopToolStripMenuItem,
             this.resetOrderToolStripMenuItem,
             this.editNameToolStripMenuItem,
             this.editIconToolStripMenuItem,
+            this.openWhereMenuItem,
             this.editExePathToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.appMenuStrip.Name = "appMenuStrip";
-            this.appMenuStrip.Size = new System.Drawing.Size(149, 136);
+            this.appMenuStrip.Size = new System.Drawing.Size(211, 200);
             // 
             // pinTopToolStripMenuItem
             // 
             this.pinTopToolStripMenuItem.Name = "pinTopToolStripMenuItem";
-            this.pinTopToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.pinTopToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.pinTopToolStripMenuItem.Text = "置顶";
             this.pinTopToolStripMenuItem.ToolTipText = "移到第一位";
             this.pinTopToolStripMenuItem.Click += new System.EventHandler(this.PinTopToolStripMenuItem_Click);
@@ -84,21 +88,21 @@
             // resetOrderToolStripMenuItem
             // 
             this.resetOrderToolStripMenuItem.Name = "resetOrderToolStripMenuItem";
-            this.resetOrderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.resetOrderToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.resetOrderToolStripMenuItem.Text = "重置位置";
             this.resetOrderToolStripMenuItem.Click += new System.EventHandler(this.ResetToolStripMenuItem_Click);
             // 
             // editNameToolStripMenuItem
             // 
             this.editNameToolStripMenuItem.Name = "editNameToolStripMenuItem";
-            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.editNameToolStripMenuItem.Text = "修改名称";
             this.editNameToolStripMenuItem.Click += new System.EventHandler(this.EditNameToolStripMenuItem_Click);
             // 
             // editIconToolStripMenuItem
             // 
             this.editIconToolStripMenuItem.Name = "editIconToolStripMenuItem";
-            this.editIconToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.editIconToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.editIconToolStripMenuItem.Text = "修改图标";
             this.editIconToolStripMenuItem.Visible = false;
             this.editIconToolStripMenuItem.Click += new System.EventHandler(this.EditIconToolStripMenuItem_Click);
@@ -106,7 +110,7 @@
             // editExePathToolStripMenuItem
             // 
             this.editExePathToolStripMenuItem.Name = "editExePathToolStripMenuItem";
-            this.editExePathToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.editExePathToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.editExePathToolStripMenuItem.Text = "修改启动命令";
             this.editExePathToolStripMenuItem.ToolTipText = "修改启动命令或者添加自定义参数";
             this.editExePathToolStripMenuItem.Visible = false;
@@ -115,14 +119,21 @@
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.deleteToolStripMenuItem.Text = "删除";
             this.deleteToolStripMenuItem.ToolTipText = "删除应用";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
+            // openWhereMenuItem
+            // 
+            this.openWhereMenuItem.Name = "openWhereMenuItem";
+            this.openWhereMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.openWhereMenuItem.Text = "打开所在目录";
+            this.openWhereMenuItem.Click += new System.EventHandler(this.openWhereMenuItem_Click);
+            // 
             // AppControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.CausesValidation = false;
@@ -131,8 +142,8 @@
             this.Controls.Add(this.appIcon);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "AppControl";
-            this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(92, 130);
+            this.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Size = new System.Drawing.Size(123, 162);
             this.Load += new System.EventHandler(this.AppControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.appIcon)).EndInit();
             this.appMenuStrip.ResumeLayout(false);
@@ -151,5 +162,6 @@
         private System.Windows.Forms.ToolStripMenuItem pinTopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editExePathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openWhereMenuItem;
     }
 }

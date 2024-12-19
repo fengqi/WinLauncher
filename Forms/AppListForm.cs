@@ -122,7 +122,7 @@ namespace WinLauncher.Forms {
             }
 
             foreach (var app in apps) {
-                if (app.Deleted) {
+                if (app.Deleted || !File.Exists(app.ExePath)) {
                     continue;
                 }
                 AppControl appControl = new AppControl(app);
@@ -197,6 +197,11 @@ namespace WinLauncher.Forms {
 
         private void AppListForm_Deactivate(object sender, EventArgs e) {
             this.Close();
+            GC.Collect();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+
         }
     }
 }
