@@ -1,10 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using WinLauncher.Models;
 using WinLauncher.Services;
 
@@ -99,8 +99,18 @@ namespace WinLauncher.Forms {
                 return;
             }
 
-            string name = Path.GetFileNameWithoutExtension(selectApp.FileName);
-            AppInfo app = appManager.AddApp(name, selectApp.FileName, selectApp.FileName);
+            AppInfo app = null;
+            if (System.IO.Path.GetExtension(selectApp.FileName) == ".lnk") {
+                IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+                IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(selectApp.FileName);
+                var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
+                app = appManager.AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
+            }
+            else {
+                string name = Path.GetFileNameWithoutExtension(selectApp.FileName);
+                app = appManager.AddApp(name, selectApp.FileName, selectApp.FileName);
+            }
+
             if (app != null) {
                 appManager.SaveAppList();
                 UpdateUI();
@@ -109,7 +119,7 @@ namespace WinLauncher.Forms {
 
         // 添加应用
         private void AddBtn_Click(object sender, EventArgs e) {
-            selectApp.Filter = "应用程序(*.exe)|*.exe";
+            selectApp.Filter = "快捷方式 (*.lnk)|*.lnk|应用程序 (*.exe)|*.exe";
             selectApp.ShowDialog();
         }
 

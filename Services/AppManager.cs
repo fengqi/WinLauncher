@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
-using Microsoft.Win32;
-using Newtonsoft.Json;
 using WinLauncher.Models;
-using System.Configuration;
-using System.Collections.Generic;
 
 namespace WinLauncher.Services {
     internal class AppManager {
@@ -167,10 +167,15 @@ namespace WinLauncher.Services {
             };
 
             foreach (var k in keys) {
-                if (k == null) continue;
+                if (k == null) {
+                    continue;
+                }
+
                 foreach (var keyName in k.GetSubKeyNames()) {
                     var key = k.OpenSubKey(keyName);
-                    if (key == null) continue;
+                    if (key == null) {
+                        continue;
+                    }
 
                     var displayName = key.GetValue("DisplayName") as string;
                     var displayVersion = key.GetValue("DisplayVersion") as string;
@@ -232,7 +237,7 @@ namespace WinLauncher.Services {
                     IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
                     IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                     var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
-                    AddApp(name, shortcut.TargetPath, shortcut.TargetPath);
+                    AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
                 }
             }
         }
@@ -257,7 +262,7 @@ namespace WinLauncher.Services {
                         IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
                         IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                         var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
-                        AddApp(name, shortcut.TargetPath, shortcut.TargetPath);
+                        AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
                     }
                 }
             }

@@ -62,7 +62,7 @@
             this.searchApp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchApp.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.searchApp.Location = new System.Drawing.Point(528, 11);
-            this.searchApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchApp.Margin = new System.Windows.Forms.Padding(4);
             this.searchApp.MaxLength = 30;
             this.searchApp.Name = "searchApp";
             this.searchApp.Size = new System.Drawing.Size(133, 18);
@@ -74,7 +74,7 @@
             // closeBtn
             // 
             this.closeBtn.Location = new System.Drawing.Point(777, 4);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(100, 29);
             this.closeBtn.TabIndex = 2;
@@ -85,7 +85,7 @@
             // addBtn
             // 
             this.addBtn.Location = new System.Drawing.Point(669, 4);
-            this.addBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addBtn.Margin = new System.Windows.Forms.Padding(4);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(100, 29);
             this.addBtn.TabIndex = 1;
@@ -116,7 +116,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.appLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AppListForm";
             this.ShowInTaskbar = false;
             this.Text = "应用列表";
