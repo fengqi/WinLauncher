@@ -125,14 +125,14 @@ namespace WinLauncher.Services {
                 return null;
             }
 
-            int findName = apps.FindIndex(item => item.Name.Equals(name));
-            if (findName != -1) {
-                if (!apps[findName].Deleted) {
-                    return null;
-                }
-                apps[findName].Deleted = false;
-                return apps[findName];
-            }
+            //int findName = apps.FindIndex(item => item.Name.Equals(name));
+            //if (findName != -1) {
+            //    if (!apps[findName].Deleted) {
+            //        return null;
+            //    }
+            //    apps[findName].Deleted = false;
+            //    return apps[findName];
+            //}
 
             int findExe = apps.FindIndex(item => item.ExePath.Equals(exePath) && item.Args == args);
             if (findExe != -1) {

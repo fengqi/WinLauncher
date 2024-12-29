@@ -132,7 +132,12 @@ namespace WinLauncher.Forms {
             }
 
             foreach (var app in apps) {
-                if (app.Deleted || !File.Exists(app.ExePath)) {
+                if (app.Deleted) {
+                    continue;
+                }
+                if (!File.Exists(app.ExePath)) {
+                    appManager.RemoteByExePath(app.ExePath);
+                    appManager.SaveAppList();
                     continue;
                 }
                 AppControl appControl = new AppControl(app);
