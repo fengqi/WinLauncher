@@ -212,7 +212,7 @@ namespace WinLauncher.Forms {
 
         private void AppListForm_Deactivate(object sender, EventArgs e) {
             this.Close();
-            GC.Collect();
+            //GC.Collect();
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
