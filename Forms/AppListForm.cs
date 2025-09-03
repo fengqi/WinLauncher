@@ -125,6 +125,10 @@ namespace WinLauncher.Forms {
 
         // 更新App列表
         private void UpdateUI(List<AppInfo> apps = null) {
+            // 优化：清空前释放控件资源，防止内存泄漏
+            for (int i = appLayoutPanel.Controls.Count - 1; i >= 0; i--) {
+                appLayoutPanel.Controls[i].Dispose();
+            }
             appLayoutPanel.Controls.Clear();
 
             if (apps == null || apps.Count == 0) {
@@ -140,13 +144,18 @@ namespace WinLauncher.Forms {
                     appManager.SaveAppList();
                     continue;
                 }
-                AppControl appControl = new AppControl(app);
-                appControl.OnLaunch += AppControl_OnLaunch;
-                appControl.OnEdit += AppControl_OnEdit;
-                appControl.OnDelete += AppControl_OnDelete;
-                appControl.OnPinTop += AppControl_OnPinTop;
-                appControl.OnReset += AppControl_OnReset;
-                appLayoutPanel.Controls.Add(appControl);
+                try {
+                    AppControl appControl = new AppControl(app);
+                    appControl.OnLaunch += AppControl_OnLaunch;
+                    appControl.OnEdit += AppControl_OnEdit;
+                    appControl.OnDelete += AppControl_OnDelete;
+                    appControl.OnPinTop += AppControl_OnPinTop;
+                    appControl.OnReset += AppControl_OnReset;
+                    appLayoutPanel.Controls.Add(appControl);
+                } catch (Exception ex) {
+                    // 控件创建异常保护
+                    Console.WriteLine($"AppControl create failed: {ex.Message}");
+                }
             }
         }
 
@@ -217,6 +226,16 @@ namespace WinLauncher.Forms {
 
         private void timer1_Tick(object sender, EventArgs e) {
 
+        }
+
+        // 优化：窗体关闭时释放资源
+        protected override void OnFormClosed(FormClosedEventArgs e) {
+            base.OnFormClosed(e);
+            for (int i = appLayoutPanel.Controls.Count - 1; i >= 0; i--) {
+                appLayoutPanel.Controls[i].Dispose();
+            }
+            appLayoutPanel.Controls.Clear();
+            searchTimer.Dispose();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using WinLauncher.Models;
 
 namespace WinLauncher.Services {
@@ -18,6 +19,7 @@ namespace WinLauncher.Services {
         }
 
         public List<AppInfo> ScanApplications() {
+            apps.Clear(); // 扫描前清空，避免重复累积
             ScanPublicDesktopApplications();
             ScanDesktopApplications();
             ScanRegistryApplications();
@@ -26,6 +28,7 @@ namespace WinLauncher.Services {
         }
 
         public List<AppInfo> ScanWatcherFloder() {
+            apps.Clear(); // 扫描前清空，避免重复累积
             LoadAppList();
             ScanWatcherFloderApplications();
 
@@ -220,6 +223,9 @@ namespace WinLauncher.Services {
                     IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                     var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
                     AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
+                    // 释放COM对象
+                    if (shortcut != null) Marshal.ReleaseComObject(shortcut);
+                    if (shell != null) Marshal.ReleaseComObject(shell);
                 }
             }
         }
@@ -238,6 +244,9 @@ namespace WinLauncher.Services {
                     IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                     var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
                     AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
+                    // 释放COM对象
+                    if (shortcut != null) Marshal.ReleaseComObject(shortcut);
+                    if (shell != null) Marshal.ReleaseComObject(shell);
                 }
             }
         }
@@ -263,6 +272,9 @@ namespace WinLauncher.Services {
                         IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(file);
                         var name = System.IO.Path.GetFileNameWithoutExtension(shortcut.FullName);
                         AddApp(name, shortcut.TargetPath, shortcut.TargetPath, shortcut.Arguments);
+                        // 释放COM对象
+                        if (shortcut != null) Marshal.ReleaseComObject(shortcut);
+                        if (shell != null) Marshal.ReleaseComObject(shell);
                     }
                 }
             }

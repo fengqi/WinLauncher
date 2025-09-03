@@ -86,6 +86,7 @@ namespace WinLauncher {
             if (e.KeyCode == Keys.Escape) {
                 TextBox textBox = (TextBox)sender;
                 Controls.Remove(textBox);
+                textBox.Dispose(); // 释放资源
                 Controls.Add(appName);
                 appName.Text = this.appInfo.Name;
             }
@@ -97,6 +98,7 @@ namespace WinLauncher {
                 TextBox textBox = (TextBox)sender;
                 this.appInfo.Name = textBox.Text;
                 Controls.Remove(textBox);
+                textBox.Dispose(); // 释放资源
                 Controls.Add(appName);
                 appName.Text = this.appInfo.Name;
                 OnEdit?.Invoke(this, e);
@@ -144,6 +146,7 @@ namespace WinLauncher {
             if (e.KeyCode == Keys.Escape) {
                 TextBox textBox = (TextBox)sender;
                 Controls.Remove(textBox);
+                textBox.Dispose(); // 释放资源
                 Controls.Add(appName);
                 appName.Text = this.appInfo.Name;
             }
